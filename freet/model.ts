@@ -1,6 +1,7 @@
 import type {Types, PopulatedDoc, Document} from 'mongoose';
 import {Schema, model} from 'mongoose';
 import type {User} from '../user/model';
+import type {FreetReact} from '../freetreact/model';
 
 /**
  * This file defines the properties stored in a Freet
@@ -14,6 +15,7 @@ export type Freet = {
   dateCreated: Date;
   content: string;
   dateModified: Date;
+  reacts: Types.ObjectId[];
 };
 
 export type PopulatedFreet = {
@@ -49,7 +51,13 @@ const FreetSchema = new Schema<Freet>({
   dateModified: {
     type: Date,
     required: true
+  },
+  // The user-generated reacts to the freet
+  reacts: {
+    type: [Schema.Types.ObjectId],
+    required: true
   }
+
 });
 
 const FreetModel = model<Freet>('Freet', FreetSchema);
