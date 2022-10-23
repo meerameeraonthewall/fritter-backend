@@ -23,7 +23,7 @@ const FreetReactSchema = new Schema<FreetReact>({
   reactorId: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref: 'Reactor'
+    ref: 'User'
   },
   // The numerical value of the reaction
   value: {

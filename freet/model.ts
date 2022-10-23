@@ -53,10 +53,7 @@ const FreetSchema = new Schema<Freet>({
     required: true
   },
   // The user-generated reacts to the freet
-  reacts: {
-    type: [Schema.Types.ObjectId],
-    required: true
-  }
+  reacts: [{type: Schema.Types.ObjectId, ref: 'FreetReact'}]
 
 });
 
