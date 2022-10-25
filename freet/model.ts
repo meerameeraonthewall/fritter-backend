@@ -16,6 +16,7 @@ export type Freet = {
   content: string;
   dateModified: Date;
   reacts: Types.ObjectId[];
+  // TODO: is this correct? ^ and is it correct in the schema? can I populate?
 };
 
 export type PopulatedFreet = {
@@ -24,6 +25,7 @@ export type PopulatedFreet = {
   dateCreated: Date;
   content: string;
   dateModified: Date;
+  reacts: FreetReact[];
 };
 
 // Mongoose schema definition for interfacing with a MongoDB table
