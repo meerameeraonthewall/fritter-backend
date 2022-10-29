@@ -60,19 +60,8 @@ const isValidFreetModifier = async (req: Request, res: Response, next: NextFunct
   next();
 };
 
-/**
- * Checks if the user in the req has reacted to the freet
- */
-const isFreetReactor = async (req: Request, res: Response, next: NextFunction) => {
-  const freet = await FreetCollection.findOne(req.params.freetId);
-  // TODO: check each freetreact in freet.reacts for req.params.reactorId. true -> return
-  // consider putting this in user middleware
-  next();
-};
-
 export {
   isValidFreetContent,
   isFreetExists,
   isValidFreetModifier
-  // TODO: add isFreetReactor
 };

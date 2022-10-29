@@ -15,8 +15,7 @@ export type Freet = {
   dateCreated: Date;
   content: string;
   dateModified: Date;
-  reacts: Types.ObjectId[];
-  // TODO: is this correct? ^ and is it correct in the schema? can I populate?
+  reacts: FreetReact[];
 };
 
 export type PopulatedFreet = {

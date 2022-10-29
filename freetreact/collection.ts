@@ -24,7 +24,7 @@ class FreetReactCollection {
   static async addOne(reactorId: Types.ObjectId | string, freetId: Types.ObjectId | string, value: number): Promise<HydratedDocument<Freet>> {
     const freet = (await FreetModel.findOne({_id: freetId}));
     const newReact = new FreetReactModel({freetId, reactorId, value});
-    freet.reacts.push(newReact.freetId);
+    freet.reacts.push(newReact);
     await freet.save(); // Saves freet to MongoDB
     return freet.populate('reacts');
   }
@@ -44,9 +44,9 @@ class FreetReactCollection {
    * Find a freetreact by reactId
    *
    * @param {string} reactId - The id of the react to find
-   * @return {Promise<HydratedDocument<FreetReact>> | Promise<null> } - The freetreact with the given reactId, if any
+   * @return {Promise<FreetReact> | Promise<null> } - The freetreact with the given reactId, if any
    */
-  static async findOne(reactId: Types.ObjectId | string): Promise<HydratedDocument<FreetReact>> {
+  static async findOne(reactId: Types.ObjectId | string): Promise<FreetReact> {
     return FreetReactModel.findOne({_id: reactId}).populate('freetId');
   }
 }
