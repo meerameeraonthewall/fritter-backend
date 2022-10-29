@@ -22,27 +22,22 @@ const router = express.Router();
  * @throws {404} - If the freetId is not valid
  */
 router.put(
-  '/:freetId',
+  '/:freetId?',
   [
     userValidator.isUserLoggedIn,
     freetValidator.isFreetExists
   ],
   async (req: Request, res: Response) => {
-    console.log('begin freet react');
     const {freetId} = req.params;
     const freet = await FreetCollection.findOne(freetId);
     const userId = (req.session.userId as string) ?? '';
     // Find the reactId of any existing freetreact by this user
     const oldReact = await FreetCollection.findFreetReactByFreetAndReactor(freet._id, userId);
     const newReactValue = Number(req.body.reactValue);
-    console.log('old react: ', oldReact);
-    console.log('request body: ', req.body);
-    console.log('New React value: ', newReactValue);
 
     if (oldReact === null || oldReact === undefined) {
       console.log('No react found on this freet from this user');
     } else {
-      console.log('else statement');
       const oldReactId: Types.ObjectId = oldReact._id;
       // If this freet has already been reacted to by this user...
       const oldReactValue = oldReact.value;
@@ -65,9 +60,10 @@ router.put(
     }
 
     await FreetCollection.addFreetReact(freet._id, newReactValue, userId);
+    const updatedFreet = await FreetCollection.findOne(freetId);
     res.status(200).json({
       message: 'You successfully reacted to the freet.',
-      freet: util.constructFreetResponse(freet)
+      freet: util.constructFreetResponse(updatedFreet)
     });
   }
 );

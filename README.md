@@ -314,5 +314,52 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `403` if the user is not logged in
 
+#### `PUT /api/freetreacts/:freetId?` - React to a Freet
+
+**Body**
+
+- `value` _{select}_ - The value of the react
+
+**Returns**
+
+- A success message
+- An object with the updated freet
+
+**Throws**
+
+- `400` if the user is not logged in
+- `404` if the freetId is invalid
+
+#### `PUT api/freets/cite/:freetId?` - Add a citation
+
+**Body**
+
+- `urls` _{string}_ - The urls to add as citations, separated by commas
+
+**Returns**
+
+- A success message
+- An object with the updated freet
+
+**Throws**
+
+- `400` if the user is not logged in
+- `404` if the freetId is invalid
+- `400` if the body string does not follow the expected URL format
+- `403` if the user is not the author of the freet
+
+#### `PUT api/users/scroll/:userId?` - Edit scroll settings
+
+**Body**
+
+- `mode` _{select}_ - The way the user wants Fritter to handle user-specified time limits
+
+**Returns**
+
+- A success message
+- An object with the update user details (without password)
+
+**Throws**
+- `400` if the user is not logged in
 
 -----------------------------------------------------------

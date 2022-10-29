@@ -5,7 +5,7 @@ import FreetReactModel from '../freetreact/model';
 import type {FreetReact} from '../freetreact/model';
 import UserCollection from '../user/collection';
 import FreetReactCollection from '../freetreact/collection';
-import { isValidFreetContent } from './middleware';
+import {isValidFreetContent} from './middleware';
 
 /**
  * This files contains a class that has the functionality to explore freets
