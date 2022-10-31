@@ -158,6 +158,9 @@ class FreetCollection {
    */
   static async findFreetReactByFreetAndReactor(freetId: Types.ObjectId | string, reactorId: Types.ObjectId | string): Promise<FreetReact | undefined> {
     const freet = await FreetModel.findOne({_id: freetId}).populate('reacts');
+    console.log('HERE');
+    console.log(freet.reacts);
+    console.log(reactorId);
     for (const react of freet.reacts) {
       console.log(react.reactorId, react.reactorId.toString());
       if (react.reactorId.toString() === reactorId.toString()) {

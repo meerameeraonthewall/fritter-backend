@@ -9,6 +9,7 @@
   <script src="/scripts/user.js"></script>
   <script src="/scripts/freetreact.js"></script>
   <script src="/scripts/index.js"></script>
+  <!-- <script src="/scripts/citation.js"></script> -->
 </head>
 
 <body>
@@ -20,20 +21,47 @@
     <section id="operations-container">
       <h2>Operations:</h2>
       <div class="scrollbox">
+        
+        <form id="sign-in">
+          <h3>Sign In</h3>
+          <div>
+            <label for="username">Username:</label>
+            <input id="username" name="username">
+          </div>
+          <div>
+            <label for="password">Password:</label>
+            <input id="password" name="password">
+          </div>
+          <input type="submit" value="Sign In">
+        </form>
+
         <form id="toggle-react">
           <h3>Toggle React</h3>
           <div>
-            <label for="freetId">ID:</label>
+            <label for="freetId">Freet ID:</label>
             <input id="freetId" name="freetId">
             <select name = 'reactValue' id="reactValue">
               <option value = '1'>v1</option>
               <option value = '2'>v2</option>
               <option value = '3'>v3</option>
             </select>
-
           </div>
           <input type="submit" value="react">
         </form>
+        
+        <form id="add-citation">
+          <h3>Add Citation</h3>
+          <div>
+            <label for="id">Freet ID:</label>
+            <input id="freetId" name="freetId">
+          </div>
+          <div>
+            <label for="content">URLS (separated by commas):</label>
+            <textarea id="urls" name="urls"></textarea>
+          </div>
+          <input type="submit" value="Add Citation">
+        </form>
+
         <form id="create-user">
           <h3>Create User</h3>
           <div>
@@ -52,13 +80,19 @@
           <input type="submit" value="Delete User">
         </form>
 
-        <form id="change-username">
-          <h3>Change Username</h3>
+        <form id="update-lockout">
+          <h3>Update Lockout</h3>
           <div>
-            <label for="username">New Username:</label>
-            <input id="username" name="username">
+            <label for="userId">User ID:</label>
+            <input id="userId" name="userId">
+            <select name = 'mode' id="mode">
+              <option value = 'soft'>soft</option>
+              <option value = 'hard'>hard</option>
+              <option value = 'decay'>decay</option>
+              <option value = 'None'>none</option>
+            </select>
           </div>
-          <input type="submit" value="Change Username">
+          <input type="submit" value="Update Lockout Preferences">
         </form>
 
         <form id="change-password">
@@ -68,19 +102,6 @@
             <input id="password" name="password">
           </div>
           <input type="submit" value="Change Password">
-        </form>
-
-        <form id="sign-in">
-          <h3>Sign In</h3>
-          <div>
-            <label for="username">Username:</label>
-            <input id="username" name="username">
-          </div>
-          <div>
-            <label for="password">Password:</label>
-            <input id="password" name="password">
-          </div>
-          <input type="submit" value="Sign In">
         </form>
 
         <form id="sign-out">

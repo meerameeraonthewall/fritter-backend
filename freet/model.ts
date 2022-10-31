@@ -2,6 +2,7 @@ import type {Types, PopulatedDoc, Document} from 'mongoose';
 import {Schema, model} from 'mongoose';
 import type {User} from '../user/model';
 import type {FreetReact} from '../freetreact/model';
+import type {Citation} from '../citation/model';
 
 /**
  * This file defines the properties stored in a Freet
@@ -16,6 +17,7 @@ export type Freet = {
   content: string;
   dateModified: Date;
   reacts: FreetReact[];
+  citations: Citation[];
 };
 
 export type PopulatedFreet = {
@@ -25,6 +27,7 @@ export type PopulatedFreet = {
   content: string;
   dateModified: Date;
   reacts: FreetReact[];
+  citations: Citation[];
 };
 
 // Mongoose schema definition for interfacing with a MongoDB table
@@ -54,7 +57,9 @@ const FreetSchema = new Schema<Freet>({
     required: true
   },
   // The user-generated reacts to the freet
-  reacts: [{type: Schema.Types.ObjectId, ref: 'FreetReact'}]
+  reacts: [{type: Schema.Types.ObjectId, ref: 'FreetReact'}],
+  // The citations attached to this freet
+  citations: [{type: Schema.Types.ObjectId, ref: 'Citation'}]
 
 });
 

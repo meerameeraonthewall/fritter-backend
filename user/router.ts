@@ -4,6 +4,7 @@ import FreetCollection from '../freet/collection';
 import UserCollection from './collection';
 import * as userValidator from '../user/middleware';
 import * as util from './util';
+import UserModel from './model';
 
 const router = express.Router();
 
@@ -147,5 +148,30 @@ router.delete(
     });
   }
 );
+
+/**
+ * Update a user's lockout settings.
+ *
+ * @name PUT /api/users/scroll/:userId?
+ *
+ * @param {string} mode - The user's new lockout mode
+ * @return {UserResponse} - The updated user
+ * @throws {403} - If user is not logged in
+ */
+/* HERE
+router.put(
+  '/:userId?',
+  [
+    userValidator.isUserLoggedIn
+  ],
+  async (req: Request, res: Response) => {
+    const {userId} = req.params;
+    const user = await UserCollection.updateLockout(userId, req.body.mode);
+    res.status(200).json({
+      message: 'Your lockout preferences were updated successfully.',
+      user: util.constructUserResponse(user)
+    });
+  }
+); */
 
 export {router as userRouter};

@@ -91,6 +91,20 @@ class UserCollection {
     const user = await UserModel.deleteOne({_id: userId});
     return user !== null;
   }
+
+  /**
+   * Update user's lockout settings
+   * @param {string} userId - The userId of the user whose settings to update
+   * @param {string} mode - The lockout mode to switch to
+   * @return {Promise<HydratedDocument<User>>} - The updated user
+   */
+  static async updateLockout(userId: Types.ObjectId | string, mode: string): Promise<HydratedDocument<User>> {
+    const user = await (await UserCollection.findOneByUserId(userId)).populate('lockout');
+    user.lockout = mode;
+    await user.save();
+    const updatedUser = await (await UserCollection.findOneByUserId(userId)).populate('lockout');
+    return updatedUser;
+  }
 }
 
 export default UserCollection;

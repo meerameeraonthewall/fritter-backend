@@ -343,7 +343,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Throws**
 
-- `400` if the user is not logged in
+- `403` if the user is not logged in
 - `404` if the freetId is invalid
 - `400` if the body string does not follow the expected URL format
 - `403` if the user is not the author of the freet

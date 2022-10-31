@@ -38,3 +38,10 @@ function signOut() {
     .then(showResponse)
     .catch(showResponse);
 }
+
+/* HERE
+function updateLockout(fields) {
+  fetch(`/api/users/scroll/${fields.userId}`, {method: 'PUT', body: JSON.stringify(fields), headers: {'Content-Type': 'application/json'}})
+    .then(showResponse)
+    .catch(showResponse);
+} */

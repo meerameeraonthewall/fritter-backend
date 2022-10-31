@@ -1,8 +1,12 @@
-import type {HydratedDocument} from 'mongoose';
+import type {HydratedDocument, Types} from 'mongoose';
 import moment from 'moment';
 import type {Freet, PopulatedFreet} from './model';
 import type {FreetReact} from '../freetreact/model';
 import FreetReactModel from '../freetreact/model';
+import type {Citation} from '../citation/model';
+import FreetModel from './model';
+import UserModel from '../user/model';
+import FreetReactCollection from '../freetreact/collection';
 
 // Update this if you add a property to the Freet type!
 type FreetResponse = {
@@ -12,6 +16,7 @@ type FreetResponse = {
   content: string;
   dateModified: string;
   reacts: FreetReact[];
+  citations: Citation[];
 };
 
 /**
@@ -43,7 +48,8 @@ const constructFreetResponse = (freet: HydratedDocument<Freet>): FreetResponse =
     author: username,
     dateCreated: formatDate(freet.dateCreated),
     dateModified: formatDate(freet.dateModified),
-    reacts: freetCopy.reacts
+    reacts: freetCopy.reacts,
+    citations: freetCopy.citations
   };
 };
 

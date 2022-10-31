@@ -40,6 +40,8 @@ const formsAndHandlers = {
   'edit-freet': editFreet,
   'delete-freet': deleteFreet,
   'toggle-react': toggleReact
+  // HERE 'add-citation': addCitation
+  // HERE 'update-lockout': updateLockout
 };
 
 // Attach handlers to forms

@@ -6,7 +6,7 @@ import UserCollection from '../user/collection';
 import * as userValidator from '../user/middleware';
 import * as freetValidator from '../freet/middleware';
 import * as util from '../freet/util';
-import {Types} from 'mongoose';
+import type {Types} from 'mongoose';
 import type Freet from '../freet/model';
 
 const router = express.Router();
@@ -45,7 +45,7 @@ router.put(
       // Remove the react
       const reactRemoved = await FreetCollection.removeFreetReact(freet._id, oldReactId);
       if (!reactRemoved) {
-        console.log('For some reason the react could not be removed');
+        ('For some reason the react could not be removed');
       }
 
       if (oldReactValue === newReactValue) {
