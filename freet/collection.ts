@@ -137,7 +137,7 @@ class FreetCollection {
    * @return {Promise<FreetReact| undefined>} - the reactId if the reactorId is in the freet's reacts, false otherwise
    */
   static async findFreetReactByFreetAndReactor(freetId: Types.ObjectId | string, reactorId: Types.ObjectId | string): Promise<FreetReact | undefined> {
-    const exists = await FreetReactModel.findOne({freetId: freetId, reactorId: reactorId});
+    const exists = await FreetReactModel.findOne({freetId, reactorId});
     return exists;
   }
 }

@@ -40,10 +40,6 @@ const constructFreetResponse = (freet: HydratedDocument<Freet>): FreetResponse =
   };
   const {username} = freetCopy.authorId;
   delete freetCopy.authorId;
-  /*  HERE const populatedReacts = freetCopy.reacts.map(async react => {
-    const reactor = await UserCollection.findOneByUserId(react.reactorId);
-    return [reactor.username, react.value.toString()];
-  }); */
 
   return {
     ...freetCopy,
