@@ -6,7 +6,7 @@ import UserCollection from '../user/collection';
 import * as userValidator from '../user/middleware';
 import * as freetValidator from '../freet/middleware';
 import * as util from '../freet/util';
-import {Types} from 'mongoose';
+import type {Types} from 'mongoose';
 import type Freet from '../freet/model';
 
 const router = express.Router();
@@ -29,10 +29,9 @@ router.put(
   ],
   async (req: Request, res: Response) => {
     const {freetId} = req.params;
-    const freet = await FreetCollection.findOne(freetId);
     const userId = (req.session.userId as string) ?? '';
     // Find the reactId of any existing freetreact by this user
-    const oldReact = await FreetCollection.findFreetReactByFreetAndReactor(freet._id, userId);
+    const oldReact = await FreetCollection.findFreetReactByFreetAndReactor(freetId, userId);
     const newReactValue = Number(req.body.reactValue);
 
     if (oldReact === null || oldReact === undefined) {
@@ -43,27 +42,27 @@ router.put(
       const oldReactValue = oldReact.value;
 
       // Remove the react
-      const reactRemoved = await FreetCollection.removeFreetReact(freet._id, oldReactId);
+      const reactRemoved = await FreetCollection.removeFreetReact(oldReactId);
       if (!reactRemoved) {
         console.log('For some reason the react could not be removed');
       }
 
       if (oldReactValue === newReactValue) {
-        const updatedFreet = await FreetCollection.findOne(freetId);
+        const freet = await FreetCollection.findOne(freetId);
         // Leave react removed if the new react value is the same as the previous.
         res.status(200).json({
           message: 'You successfully removed your react to the freet.',
-          freet: util.constructFreetResponse(updatedFreet)
+          freet: util.constructFreetResponse(freet)
         });
         return;
       }
     }
 
-    await FreetCollection.addFreetReact(freet._id, newReactValue, userId);
-    const updatedFreet = await FreetCollection.findOne(freetId);
+    await FreetCollection.addFreetReact(freetId, newReactValue, userId);
+    const freet = await FreetCollection.findOne(freetId);
     res.status(200).json({
       message: 'You successfully reacted to the freet.',
-      freet: util.constructFreetResponse(updatedFreet)
+      freet: util.constructFreetResponse(freet)
     });
   }
 );

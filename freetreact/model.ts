@@ -8,7 +8,13 @@ export type FreetReact = {
   freetId: Types.ObjectId;
   reactorId: Types.ObjectId;
   value: number;
-
+};
+// Type definition for FreetReact on the backend
+export type PopulatedFreetReact = {
+  _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
+  freetId: Types.ObjectId;
+  reactorId: User;
+  value: number;
 };
 
 const FreetReactSchema = new Schema<FreetReact>({

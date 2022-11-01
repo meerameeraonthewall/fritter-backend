@@ -3,6 +3,10 @@ import moment from 'moment';
 import type {Freet, PopulatedFreet} from './model';
 import type {FreetReact} from '../freetreact/model';
 import FreetReactModel from '../freetreact/model';
+import {constructFreetReactResponse} from '../freetreact/util';
+import type {FreetReactResponse} from '../freetReact/util';
+import FreetReactCollection from 'freetreact/collection';
+import UserCollection from '../user/collection';
 
 // Update this if you add a property to the Freet type!
 type FreetResponse = {
@@ -11,7 +15,6 @@ type FreetResponse = {
   dateCreated: string;
   content: string;
   dateModified: string;
-  reacts: FreetReact[];
 };
 
 /**
@@ -37,13 +40,17 @@ const constructFreetResponse = (freet: HydratedDocument<Freet>): FreetResponse =
   };
   const {username} = freetCopy.authorId;
   delete freetCopy.authorId;
+  /*  HERE const populatedReacts = freetCopy.reacts.map(async react => {
+    const reactor = await UserCollection.findOneByUserId(react.reactorId);
+    return [reactor.username, react.value.toString()];
+  }); */
+
   return {
     ...freetCopy,
     _id: freetCopy._id.toString(),
     author: username,
     dateCreated: formatDate(freet.dateCreated),
-    dateModified: formatDate(freet.dateModified),
-    reacts: freetCopy.reacts
+    dateModified: formatDate(freet.dateModified)
   };
 };
 

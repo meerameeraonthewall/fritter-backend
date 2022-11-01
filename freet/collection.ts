@@ -109,44 +109,24 @@ class FreetCollection {
    * @return {Promise<FreetReact>} - The same freet, now with a new react
    */
   static async addFreetReact(freetId: Types.ObjectId | string, value: number, reactorId: Types.ObjectId | string): Promise<FreetReact> {
-    const freet = await FreetModel.findOne({_id: freetId});
     const react = new FreetReactModel({
       freetId,
       reactorId,
       value
     });
-
     await react.save();
-    freet.reacts.push(react);
-    await freet.save();
+    console.log('react created');
     return react;
   }
 
   /**
    *  Remove a freetreact from the freet
-   * @param {string} freetId - The freetId of the freet from which to remove a react
    * @param {string} reactId - The Id of the react to remove from the freet
    * @return {Promise<boolean>} - true if the react has been deleted, false otherwise
    */
-  static async removeFreetReact(freetId: Types.ObjectId | string, reactId: Types.ObjectId | string): Promise<boolean> {
-    const freet = await FreetModel.findOne({_id: freetId});
-    let reactIndex = 0;
-    for (let i = 0; i < freet.reacts.length; i++) {
-      const react = freet.reacts[i];
-      if (react._id === reactId) {
-        reactIndex = i;
-        break;
-      }
-    }
-
-    if (reactIndex > -1) {
-      freet.reacts.splice(reactIndex, 1);
-      await freet.save();
-      await FreetReactModel.deleteOne({_id: reactId});
-      return true;
-    }
-
-    return false;
+  static async removeFreetReact(reactId: Types.ObjectId | string): Promise<boolean> {
+    await FreetReactModel.deleteOne({_id: reactId});
+    return true;
   }
 
   /**
@@ -157,15 +137,8 @@ class FreetCollection {
    * @return {Promise<FreetReact| undefined>} - the reactId if the reactorId is in the freet's reacts, false otherwise
    */
   static async findFreetReactByFreetAndReactor(freetId: Types.ObjectId | string, reactorId: Types.ObjectId | string): Promise<FreetReact | undefined> {
-    const freet = await FreetModel.findOne({_id: freetId}).populate('reacts');
-    for (const react of freet.reacts) {
-      console.log(react.reactorId, react.reactorId.toString());
-      if (react.reactorId.toString() === reactorId.toString()) {
-        return react;
-      }
-    }
-
-    return null;
+    const exists = await FreetReactModel.findOne({freetId: freetId, reactorId: reactorId});
+    return exists;
   }
 }
 

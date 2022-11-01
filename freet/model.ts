@@ -15,7 +15,6 @@ export type Freet = {
   dateCreated: Date;
   content: string;
   dateModified: Date;
-  reacts: FreetReact[];
 };
 
 export type PopulatedFreet = {
@@ -24,7 +23,6 @@ export type PopulatedFreet = {
   dateCreated: Date;
   content: string;
   dateModified: Date;
-  reacts: FreetReact[];
 };
 
 // Mongoose schema definition for interfacing with a MongoDB table
@@ -52,10 +50,7 @@ const FreetSchema = new Schema<Freet>({
   dateModified: {
     type: Date,
     required: true
-  },
-  // The user-generated reacts to the freet
-  reacts: [{type: Schema.Types.ObjectId, ref: 'FreetReact'}]
-
+  }
 });
 
 const FreetModel = model<Freet>('Freet', FreetSchema);
