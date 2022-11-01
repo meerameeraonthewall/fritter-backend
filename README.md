@@ -330,23 +330,45 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if the user is not logged in
 - `404` if the freetId is invalid
 
-#### `PUT api/freets/cite/:freetId?` - Add a citation
+#### `POST api/cite/:freetId?` - Add a citation
 
 **Body**
 
-- `urls` _{string}_ - The urls to add as citations, separated by commas
+- `url` _{string}_ - The url to add as a citation
 
 **Returns**
 
 - A success message
-- An object with the updated freet
+- An object with the new citation
 
 **Throws**
 
-- `400` if the user is not logged in
+- `403` if the user is not logged in
 - `404` if the freetId is invalid
 - `400` if the body string does not follow the expected URL format
 - `403` if the user is not the author of the freet
+
+#### `DELETE api/cite/:citationId?` - Remove a citation
+
+**Returns**
+
+- An array of citations
+
+**Throws**
+
+- `404` if the freet with that ID does not exist
+
+#### `GET api/cite/:freetId?` - View citations by freet
+
+**Returns**
+
+- A success message
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the citation with that ID does not exist
+
 
 #### `PUT api/users/scroll/:userId?` - Edit scroll settings
 
