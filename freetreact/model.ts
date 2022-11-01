@@ -1,19 +1,11 @@
 import type {Types, PopulatedDoc, Document} from 'mongoose';
 import {Schema, model} from 'mongoose';
-import type {User} from '../user/model';
 
 // Type definition for FreetReact on the backend
 export type FreetReact = {
   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
   freetId: Types.ObjectId;
   reactorId: Types.ObjectId;
-  value: number;
-};
-// Type definition for FreetReact on the backend
-export type PopulatedFreetReact = {
-  _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
-  freetId: Types.ObjectId;
-  reactorId: User;
   value: number;
 };
 

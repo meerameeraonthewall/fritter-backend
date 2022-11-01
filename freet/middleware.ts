@@ -1,5 +1,4 @@
 import type {Request, Response, NextFunction} from 'express';
-import FreetReactCollection from 'freetreact/collection';
 import {Types} from 'mongoose';
 import FreetCollection from '../freet/collection';
 

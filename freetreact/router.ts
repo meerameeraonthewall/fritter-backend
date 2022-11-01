@@ -1,13 +1,10 @@
-import type {NextFunction, Request, Response} from 'express';
+import type {Request, Response} from 'express';
 import express from 'express';
-import FreetReactCollection from './collection';
 import FreetCollection from '../freet/collection';
-import UserCollection from '../user/collection';
 import * as userValidator from '../user/middleware';
 import * as freetValidator from '../freet/middleware';
 import * as util from '../freet/util';
 import type {Types} from 'mongoose';
-import type Freet from '../freet/model';
 
 const router = express.Router();
 
@@ -54,7 +51,6 @@ router.put(
           message: 'You successfully removed your react to the freet.',
           freet: util.constructFreetResponse(freet)
         });
-        return;
       }
     }
 

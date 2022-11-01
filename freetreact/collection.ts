@@ -1,15 +1,13 @@
-import type {HydratedDocument, Types} from 'mongoose';
+import type {Types} from 'mongoose';
 import type {FreetReact} from './model';
 import FreetReactModel from './model';
-import type {Freet} from '../freet/model';
-import FreetModel from '../freet/model';
-import UserCollection from '../user/collection';
 
 /**
  * Operations:
  *  addOne
  *  removeOne
  *  findOne
+ *  findByFreetId
  */
 
 class FreetReactCollection {
