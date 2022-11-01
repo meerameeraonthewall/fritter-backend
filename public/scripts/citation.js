@@ -12,7 +12,13 @@ function addCitation(fields) {
 
 function removeCitation(fields) {
     fetch(`/api/cite/${fields.citationId}`, {method: 'DELETE'})
-    .then(showResponse)
-    .catch(showResponse);
+      .then(showResponse)
+      .catch(showResponse);
+}
+
+function viewCitationsByFreet(fields) {
+    fetch(`/api/cite/${fields.freetId}`)
+      .then(showResponse)
+      .catch(showResponse);
 }
   

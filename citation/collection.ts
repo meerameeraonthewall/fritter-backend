@@ -45,7 +45,7 @@ class CitationCollection {
   }
 
   /**
-   * Find all citation by freetId
+   * Find all citations by freetId
    */
   static async findByFreetId(freetId: Types.ObjectId | string): Promise<Citation[]> {
     const citations = await CitationModel.find({freetId});

@@ -51,6 +51,7 @@ router.put(
           message: 'You successfully removed your react to the freet.',
           freet: util.constructFreetResponse(freet)
         });
+        return;
       }
     }
 

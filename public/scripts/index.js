@@ -41,7 +41,8 @@ const formsAndHandlers = {
   'delete-freet': deleteFreet,
   'toggle-react': toggleReact,
   'add-citation': addCitation,
-  'remove-citation': removeCitation
+  'remove-citation': removeCitation,
+  'view-citations-by-freet': viewCitationsByFreet
 };
 
 // Attach handlers to forms

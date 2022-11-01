@@ -25,10 +25,11 @@ const isCitationExists = async (req: Request, res: Response, next: NextFunction)
  */
 const isValidUrl = (req: Request, res: Response, next: NextFunction) => {
   const {url} = req.body as {url: string};
-  // Syntax from https://stackoverflow.com/questions/3809401/what-is-a-good-regular-expression-to-match-a-url
-  const exp = '^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$';
+  console.log('checking URL');
+  // Syntax from https://www.regextester.com/93652
+  const exp = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
   const urlPattern = new RegExp(exp);
-  console.log(urlPattern.test(url));
+
   if (!urlPattern.test(url)) {
     res.status(400).json({
       error: 'URL must be valid URL.'

@@ -1,4 +1,4 @@
-import type {Request, Response} from 'express';
+import type {NextFunction, Request, Response} from 'express';
 import express from 'express';
 import * as userValidator from '../user/middleware';
 import * as freetValidator from '../freet/middleware';
@@ -43,9 +43,19 @@ router.post(
  * @name GET /api/cite/:id
  *
  * @return {Citation[]} an array of citations
- * @throws {400} - If authorId is not given
- * @throws {404} - If no user has given authorId
+ * @throws {404} - If no freet has given freetId
  */
+router.get(
+  '/:freetId?',
+  [
+    freetValidator.isFreetExists
+  ],
+  async (req: Request, res: Response) => {
+    const {freetId} = req.params;
+    const citations = await CitationCollection.findByFreetId(freetId);
+    res.status(200).json(citations);
+  }
+);
 
 /**
  * Remove a citation
@@ -63,9 +73,7 @@ router.delete(
     citationValidator.isCitationExists
   ],
   async (req: Request, res: Response) => {
-    console.log('begin delete cite');
     const {citationId} = req.params;
-    console.log('HERE');
     await CitationCollection.removeOne(citationId);
     res.status(200).json({
       message: 'Your citation was deleted successfully.'
