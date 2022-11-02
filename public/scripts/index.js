@@ -40,6 +40,7 @@ const formsAndHandlers = {
   'edit-freet': editFreet,
   'delete-freet': deleteFreet,
   'toggle-react': toggleReact,
+  'view-reacts-by-freet': viewReacts,
   'add-citation': addCitation,
   'remove-citation': removeCitation,
   'view-citations-by-freet': viewCitationsByFreet

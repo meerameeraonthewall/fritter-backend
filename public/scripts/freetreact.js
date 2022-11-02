@@ -9,3 +9,9 @@ function toggleReact(fields) {
     .then(showResponse)
     .catch(showResponse);
 }
+
+function viewReacts(fields) {
+  fetch(`/api/freetreacts/${fields.freetId}`)
+  .then(showResponse)
+  .catch(showResponse);
+}

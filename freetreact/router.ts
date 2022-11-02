@@ -5,6 +5,7 @@ import * as userValidator from '../user/middleware';
 import * as freetValidator from '../freet/middleware';
 import * as util from '../freet/util';
 import type {Types} from 'mongoose';
+import FreetReactCollection from './collection';
 
 const router = express.Router();
 
@@ -61,6 +62,25 @@ router.put(
       message: 'You successfully reacted to the freet.',
       freet: util.constructFreetResponse(freet)
     });
+  }
+);
+
+/** Get all reacts for a freet
+ *
+ * @name GET /api/freetreacts/:id
+ *
+ * @return {FreetReact[]} an array of citations
+ * @throws {404} - If no freet has given freetId
+ */
+router.get(
+  '/:freetId?',
+  [
+    freetValidator.isFreetExists
+  ],
+  async (req: Request, res: Response) => {
+    const {freetId} = req.params;
+    const reacts = await FreetReactCollection.findByFreetId(freetId);
+    res.status(200).json(reacts);
   }
 );
 

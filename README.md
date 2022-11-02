@@ -330,6 +330,16 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if the user is not logged in
 - `404` if the freetId is invalid
 
+### `GET api/freetreacts/:freetId?` - View reacts by Freet
+
+**Returns**
+
+- An array of all the freetreacts associated with the freet with id freetId
+
+**Throws**
+
+- `404` if freet doesn't exist with freetId
+
 #### `POST api/cite/:freetId?` - Add a citation
 
 **Body**
@@ -362,11 +372,10 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Returns**
 
-- A success message
+- An array of citations associated with the freet with ID freetId
 
 **Throws**
 
-- `403` if the user is not logged in
 - `404` if the citation with that ID does not exist
 
 
